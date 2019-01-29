@@ -12,6 +12,12 @@
       <link rel="stylesheet" href="core.css">
 
       <!-- manifest-->
+
+      <!-- scripts-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/1.0.14/webcomponents-hi.js"></script>
+
+      <!-- import components-->
+      <link rel="import" href="components/GameCard/GameCard.html">
     </head>
 
     <body>
@@ -22,7 +28,15 @@
       </header>
       
       <div id="content">
-
+        
+        <div class="game-container"></div>
+          <game-card game-name="Zelda" game-image="./images/Zelda.jpg"></game-card>
+          <game-card game-name="1-2-Switch" game-image="./images/12Switch.jpg"></game-card>
+          <game-card game-name="Shovel Knight" game-image="./images/Shovel.jpg"></game-card>
+        </div>
+        
+        
+        
       </div>
 
       <footer>

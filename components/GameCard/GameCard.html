@@ -1,0 +1,38 @@
+<template id="game-card-template">
+  <!-- import the css for the component-->
+  <!--<link rel="stylesheet" type="text/css" href="/UserCard/UserCard.css">-->
+  <style>
+    .game-card__container{
+      width:200px;
+      height:200px;
+      position:relative;
+      margin-top: 2.3em;
+    }
+
+    .game-card__name{
+      position:absolute;
+      width:100%;
+
+      margin:0px;
+      top:-1.5em;
+
+      color:#05DED2;
+      font-size: 1.3em;
+      font-weight:normal;
+      text-align:center;
+    }
+
+    .game-card__image{
+      width:100%;
+    }
+  </style>
+
+
+  <div class="game-card__container">
+    <h2 class="game-card__name">Something</h2>
+    <img class="game-card__image"/>
+  </div>
+</template>
+
+<!-- import the javascript for the template-->
+<script src="./GameCard.js"></script>

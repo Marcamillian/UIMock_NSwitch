@@ -30,6 +30,10 @@ header span{
 div#content{
   width:100%;
   flex-grow:1;
+
+  display:flex;
+  justify-content: center;
+  align-items:center;
 }
 
 footer{
@@ -42,4 +46,11 @@ footer span{
   float:right;
 }
 
+.game-container{
+  display:block;
+}
 
+game-card{
+  float:left;
+  padding: 0px 5px;
+}
