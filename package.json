@@ -1,0 +1,11 @@
+{
+  "name": "switchui",
+  "version": "1.0.0",
+  "description": "UI Package replicating the Nintendo Switch Menu Screen",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Marc Vousden",
+  "license": "MIT"
+}

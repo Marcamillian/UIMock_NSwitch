@@ -1,0 +1,45 @@
+html{
+
+  height:100%;
+  width:100%;
+
+  background-color: #EAECE9;
+  
+  color: #393738;
+  font-family: 'Varela Round', sans-serif;
+  font-weight: bold;
+}
+
+body{
+  display:flex;
+  flex-direction:column;
+  margin:0px;
+  height:calc(100% - 2em);
+  width:calc(100% - 2em);
+  margin:1em;
+}
+
+header{
+  width:100%;
+}
+header span{
+  padding:0.2em;
+  float:right;
+}
+
+div#content{
+  width:100%;
+  flex-grow:1;
+}
+
+footer{
+  width:100%;
+  margin-top:0.75em;
+  border-top: 2px solid #AAAAAA;
+}
+footer span{
+  padding:0.5em;
+  float:right;
+}
+
+
