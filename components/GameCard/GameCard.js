@@ -1,4 +1,4 @@
-const currentDocument = document.currentScript.ownerDocument;
+var currentDocument = document.currentScript.ownerDocument;
 
 class GameCard extends HTMLElement {
   constructor(){
@@ -15,20 +15,17 @@ class GameCard extends HTMLElement {
   }
 
   connectedCallback(){
-
-    console.log("something")
-
-    const shadowRoot = this.attachShadow({mode:'open'})
+    let shadowRoot = this.attachShadow({mode:'open'})
 
     // get the template and clone it
-    const template = currentDocument.querySelector('#game-card-template');
-    const instance = template.content.cloneNode(true);
+    let template = currentDocument.querySelector('#game-card-template');
+    let instance = template.content.cloneNode(true);
 
     shadowRoot.appendChild(instance);
 
     // Extract the attributes from our element
-    const gameName = this.getAttribute('game-name')
-    const gameImageSrc = this.getAttribute('game-image')
+    let gameName = this.getAttribute('game-name')
+    let gameImageSrc = this.getAttribute('game-image')
 
     this.render({name:gameName, imageSrc:gameImageSrc})
   }
