@@ -20,20 +20,30 @@ class ListBox extends HTMLElement{
   }
 
   connectedCallback(){
+    let listName = this.getAttribute('list-name') || 'Some list';
+    let listOrientation = this.getAttribute('list-orientation') || 'vertical';
+    
     this.setAttribute('tabindex',0);
+    this.setAttribute("role", "listbox");
+    this.setAttribute("aria-label", listName);
+    this.setAttribute("aria-orientation", listOrientation)
 
     this.items = this.slice(this.children);
+    this.items.forEach(item =>{
+      item.setAttribute("role","option")
+    })
+    
     this.focusedIdx = 0; // default focused element
     this.focusedItem= this.items[this.focusedIdx] // set ref to focused item
 
+
+
     this.addEventListener('keydown', this.handleKeyDown.bind(this))
     // click event listener?
+
   }
 
   handleKeyDown(event){
-    // ! TODO - this is not picking up focusedIdx or focusedItem
-    
-    console.log("focus key press")
     
     switch(event.keyCode){
       case KB_CODES["VK_UP"]:
@@ -64,12 +74,14 @@ class ListBox extends HTMLElement{
   changeFocus(idx){
     this.focusedItem.tabIndex = -1; // old item unfocused
     this.focusedItem.removeAttribute('checked'); // remove checked attribute
+    this.focusedItem.removeAttribute('aria-selected');
 
     // focus on the new element
     this.focusedItem = this.items[idx];
     this.focusedItem.tabIndex = 0;
     this.focusedItem.focus();
     this.focusedItem.setAttribute('checked','checked')
+    this.focusedItem.setAttribute('aria-selected', true)
   }
 
 }
