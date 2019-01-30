@@ -55,7 +55,7 @@ footer span{
 }
 
 game-card{
-  float:left;
+  float:right;
   padding: 0px 5px;
 }
 
@@ -63,8 +63,9 @@ game-card{
   display:flex;
   flex-direction:row;
 }
-
+    
 menu-icon{
+  float:right;
   padding:0.5em;
   width:70px;
 }
