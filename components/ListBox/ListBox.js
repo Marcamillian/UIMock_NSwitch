@@ -39,6 +39,7 @@ class ListBox extends HTMLElement{
 
 
     this.addEventListener('keydown', this.handleKeyDown.bind(this))
+    this.addEventListener('focus', this.handleOnFocus.bind(this))
     // click event listener?
 
   }
@@ -49,10 +50,10 @@ class ListBox extends HTMLElement{
       case KB_CODES["VK_UP"]:
       case KB_CODES["VK_LEFT"]:
         event.preventDefault();
-        if(this.focusedIdx < this.items.length-1){
-          this.focusedIdx ++
+        if(this.focusedIdx > 0){
+          this.focusedIdx --
         }else{
-          this.focusedIdx = 0
+          this.focusedIdx = this.items.length-1
         }
 
       break;
@@ -60,16 +61,21 @@ class ListBox extends HTMLElement{
       case KB_CODES["VK_DOWN"]:
       case KB_CODES["VK_RIGHT"]:
         event.preventDefault();
-        if(this.focusedIdx > 0){
-          this.focusedIdx --;
+        if(this.focusedIdx < this.items.length-1){
+          this.focusedIdx ++;
         }else{
-          this.focusedIdx = this.items.length-1;
+          this.focusedIdx = 0;
         }
       break;
     }
 
     this.changeFocus(this.focusedIdx)
   }
+
+  handleOnFocus(event){
+    this.changeFocus(this.focusedIdx)
+  }
+
 
   changeFocus(idx){
     this.focusedItem.tabIndex = -1; // old item unfocused
