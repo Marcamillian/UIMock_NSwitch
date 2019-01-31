@@ -56,6 +56,8 @@ footer span{
 
 game-card{
   float:left;
+  width:200px;
+  height:200px;
 }
 game-card:focus{
   outline:none;
@@ -64,10 +66,14 @@ game-card:focus{
 .menu-container{
   display:flex;
   flex-direction:row;
+  margin-top:1em;
 }
     
 menu-icon{
   float:right;
   padding:0.5em;
   width:70px;
+}
+menu-icon:focus{
+  outline:none;
 }

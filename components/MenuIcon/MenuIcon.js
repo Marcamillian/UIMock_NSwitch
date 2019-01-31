@@ -3,6 +3,9 @@ var currentDocument = document.currentScript.ownerDocument;
 class MenuIcon extends HTMLElement{
   constructor(){
     super()
+
+    this.addEventListener('focus', this.handleOnFocus.bind(this))
+    this.addEventListener('blur', this.handleOnBlur.bind(this))
   }
 
   render({label, imageSrc}){
@@ -25,6 +28,16 @@ class MenuIcon extends HTMLElement{
     let imageSrc = this.getAttribute('icon-image');
 
     this.render({label, imageSrc})
+  }
+
+  handleOnFocus(){
+    let menuIconContainer = this.shadowRoot.querySelector('.menu-icon__container');
+    menuIconContainer.classList.add("focused")
+  }
+
+  handleOnBlur(){
+    let menuIconContainer = this.shadowRoot.querySelector('.menu-icon__container');
+    menuIconContainer.classList.remove("focused")
   }
 }
 
