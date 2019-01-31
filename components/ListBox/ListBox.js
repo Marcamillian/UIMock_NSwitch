@@ -42,6 +42,7 @@ class ListBox extends HTMLElement{
 
     this.addEventListener('keydown', this.handleKeyDown.bind(this))
     this.addEventListener('focus', this.handleOnFocus.bind(this))
+    this.addEventListener('click', this.handleOnClick.bind(this))
     // click event listener?
 
   }
@@ -76,6 +77,11 @@ class ListBox extends HTMLElement{
 
   handleOnFocus(event){
     this.changeFocus(this.focusedIdx)
+  }
+
+  handleOnClick(event){
+    let clickedItemIndex = this.items.indexOf(event.target);
+    this.changeFocus(clickedItemIndex)
   }
 
 
