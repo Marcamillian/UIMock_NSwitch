@@ -56,7 +56,9 @@ footer span{
 
 game-card{
   float:left;
-  padding: 0px 5px;
+}
+game-card:focus{
+  outline:none;
 }
 
 .menu-container{

@@ -4,9 +4,8 @@ class GameCard extends HTMLElement {
   constructor(){
     super()
 
-    this.addEventListener('click', e =>{
-      this.toggleCard()
-    })
+    this.addEventListener('focus', this.handleOnFocus.bind(this))
+    this.addEventListener('blur', this.handleOnBlur.bind(this))
   }
 
   render({name, imageSrc}){
@@ -30,9 +29,15 @@ class GameCard extends HTMLElement {
     this.render({name:gameName, imageSrc:gameImageSrc})
   }
 
+  handleOnFocus(){
+    let gameCardContainer = this.shadowRoot.querySelector('.game-card__container');
+    gameCardContainer.classList.add("focused")
 
-  toggleCard(){
-    console.log("Element was clicked!")
+  }
+  handleOnBlur(){
+    let gameCardContainer = this.shadowRoot.querySelector('.game-card__container');
+    gameCardContainer.classList.remove("focused")
+
   }
 
 }
