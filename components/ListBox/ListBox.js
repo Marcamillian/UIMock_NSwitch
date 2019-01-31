@@ -6,7 +6,9 @@ const KB_CODES = {
   "VK_LEFT": 37,
   "VK_UP": 38,
   "VK_RIGHT": 39,
-  "VK_DOWN": 40
+  "VK_DOWN": 40,
+  "VK_SHIFT":16,
+  "VK_TAB":9,
 }
 
 class ListBox extends HTMLElement{
