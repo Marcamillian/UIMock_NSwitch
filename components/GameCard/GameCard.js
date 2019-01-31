@@ -9,6 +9,7 @@ class GameCard extends HTMLElement {
   }
 
   render({name, imageSrc}){
+    this.setAttribute('aria-label', name)
     this.shadowRoot.querySelector('.game-card__name').innerHTML = name;
     this.shadowRoot.querySelector('.game-card__image').src = imageSrc;
   }

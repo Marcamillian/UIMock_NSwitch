@@ -9,6 +9,7 @@ class MenuIcon extends HTMLElement{
   }
 
   render({label, imageSrc}){
+    this.setAttribute('aria-label', label);
     this.shadowRoot.querySelector('.menu-icon__label').innerHTML = label;
     this.shadowRoot.querySelector('.menu-icon__image').src = imageSrc;
   }
