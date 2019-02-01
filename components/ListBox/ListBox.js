@@ -33,23 +33,26 @@ class ListBox extends HTMLElement{
     this.items = this.slice(this.children);
     this.items.forEach(item =>{
       item.setAttribute("role","option")
+      item.addEventListener("focusout", this.blurItem.bind(item))
     })
     
     this.focusedIdx = 0; // default focused element
     this.focusedItem= this.items[this.focusedIdx] // set ref to focused item
 
-
-
     this.addEventListener('keydown', this.handleKeyDown.bind(this))
-    this.addEventListener('focus', this.handleOnFocus.bind(this))
+    //this.addEventListener('focus', this.handleOnFocus.bind(this))
     this.addEventListener('mousedown', this.handleOnClick.bind(this))
-    // click event listener?
 
   }
 
   handleKeyDown(event){
-    
+
     switch(event.keyCode){
+      /*
+      case KB_CODES["VK_TAB"]:
+        this.focusOutsideList();
+      break;
+      */
       case KB_CODES["VK_UP"]:
       case KB_CODES["VK_LEFT"]:
         event.preventDefault();
@@ -58,9 +61,8 @@ class ListBox extends HTMLElement{
         }else{
           this.focusedIdx = this.items.length-1
         }
-
+        this.changeFocus(this.focusedIdx)
       break;
-      
       case KB_CODES["VK_DOWN"]:
       case KB_CODES["VK_RIGHT"]:
         event.preventDefault();
@@ -69,10 +71,10 @@ class ListBox extends HTMLElement{
         }else{
           this.focusedIdx = 0;
         }
+        this.changeFocus(this.focusedIdx)
       break;
     }
 
-    this.changeFocus(this.focusedIdx)
   }
 
   handleOnFocus(event){
@@ -97,6 +99,14 @@ class ListBox extends HTMLElement{
     this.focusedItem.focus();
     this.focusedItem.setAttribute('checked','checked')
     this.focusedItem.setAttribute('aria-selected', true)
+  }
+
+  focusOutsideList(){
+    this.focusedItem.tabIndex = -1
+  }
+
+  blurItem(){
+    this.tabIndex = -1
   }
 
 }
