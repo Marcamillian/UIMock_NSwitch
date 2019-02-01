@@ -1,25 +1,58 @@
 
 <template id="menu-icon-template">
   <style>
+
+    @keyframes border-pulse{
+      from{
+        border:4px solid #50fbf3;
+      }
+      to{
+        border:4px solid #04AFA6;
+      }
+    }
+
     .menu-icon__container{
-      display:block;
-      flex-direction:column;
+      position:relative;
+      width:100%;
+      margin-bottom: 1.5em;
     }
 
     .menu-icon__image{
       display:block;
+      width:calc(100% - (2px + 2px));
+      
       border-radius: 100%;
-      border: 2px solid #E8E8E8;
-      width:100%;
+      border: 4px solid #E8E8E8;
     }
 
     .menu-icon__label{
-      display:block;
+
+      display:none;
+      position:absolute;
+
+      width:100%;
       color:#05DED2;
       font-weight:normal;
       font-size: 1.1em;
       text-align:center;
     }
+
+    /* focused style */
+    .menu-icon__container.focused .menu-icon__label{
+      display:initial;
+    }
+
+    .menu-icon__container.focused .menu-icon__image{
+
+      border: 4px solid #05DED2;
+      
+      animation-name: border-pulse;
+      animation-direction: alternate;
+      animation-duration: 0.5s;
+      animation-iteration-count: infinite;
+    
+    }
+
   </style>
 
   <div class="menu-icon__container">

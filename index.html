@@ -9,7 +9,7 @@
     
       <!-- stylesheets -->
       <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
-      <link rel="stylesheet" href="core.css">
+      <link rel="stylesheet" href="./core.css">
 
       <!-- manifest-->
 
@@ -17,8 +17,9 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/1.0.14/webcomponents-hi.js"></script>
 
       <!-- import components-->
-      <link rel="import" href="components/GameCard/GameCard.html">
-      <link rel="import" href="components/MenuIcon/MenuIcon.html">
+      <link rel="import" href="./components/GameCard/GameCard.html">
+      <link rel="import" href="./components/MenuIcon/MenuIcon.html">
+      <link rel="import" href="./components/ListBox/ListBox.html">
       
     </head>
 
@@ -31,16 +32,21 @@
       
       <div id="content">
         
-        <section class="game-container">
+        <list-box class="game-container item-list" list-name="Games" list-orientation="horizontal">
           <game-card game-name="Zelda" game-image="./images/Zelda.jpg"></game-card>
           <game-card game-name="1-2-Switch" game-image="./images/12Switch.jpg"></game-card>
           <game-card game-name="Shovel Knight" game-image="./images/Shovel.jpg"></game-card>
-        </section>
+        </list-box>
 
-        <section class="menu-container">
-          <menu-icon icon-label="Shop" icon-image="images/MenuIcons/Shop.jpg"></menu-icon>
-          <menu-icon icon-label="Album" icon-image="images/MenuIcons/Album.jpg"></menu-icon>
-        </section>
+        <list-box class="menu-container item-list" list-name="Utilities" list-orientation="horizontal">
+          <menu-icon icon-label="News" icon-image="./images/MenuIcons/Message.jpg"></menu-icon>
+          <menu-icon icon-label="Shop" icon-image="./images/MenuIcons/Shop.jpg"></menu-icon>
+          <menu-icon icon-label="Album" icon-image="./images/MenuIcons/Album.jpg"></menu-icon>
+          <menu-icon icon-label="Controller" icon-image="./images/MenuIcons/Controllers.jpg"></menu-icon>
+          <menu-icon icon-label="System Settings" icon-image="./images/MenuIcons/Settings.jpg"></menu-icon>
+          <menu-icon icon-label="Sleep Mode" icon-image="./images/MenuIcons/Sleep.jpg"></menu-icon>
+
+        </list-box>
         
       </div>
 
@@ -48,6 +54,7 @@
         <span> Ⓐ Start </span>
         <span> ➖/➕ Options </span>
       </footer>
+
     </body>
 </html>
 

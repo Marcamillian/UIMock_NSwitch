@@ -2,14 +2,24 @@
   <!-- import the css for the component-->
   <!--<link rel="stylesheet" type="text/css" href="/UserCard/UserCard.css">-->
   <style>
+
+    @keyframes border-pulse{
+      from{
+        outline:4px solid #50fbf3;
+      }
+      to{
+        outline:4px solid #04AFA6;
+      }
+    }
+
+    /* unfocused styling */
     .game-card__container{
-      width:200px;
-      height:200px;
       position:relative;
       margin-top: 2.3em;
     }
-
+    
     .game-card__name{
+      display:none;
 
       position:absolute;
       width:100%;
@@ -22,10 +32,29 @@
       font-weight:normal;
       text-align:center;
     }
-
+    
     .game-card__image{
-      width:100%;
+      width: calc(100% - 16px);
+      margin: 7px;
     }
+
+    /* focus styling */
+
+    .game-card__container.focused .game-card__name{
+      display:initial;
+    }
+
+    .game-card__container.focused .game-card__image{
+      margin: 4px;
+      border:3px solid white;
+      outline: 4px solid #05DED2;
+
+      animation-name: border-pulse;
+      animation-direction:alternate;
+      animation-duration: 0.5s;
+      animation-iteration-count:infinite;
+    }
+
   </style>
 
 
