@@ -52,10 +52,10 @@ footer span{
 .game-container{
   display:block;
   margin:2em 0em;
+  max-width:100%;
 }
 
 game-card{
-  float:left;
   width:200px;
   height:200px;
 }
@@ -70,7 +70,6 @@ game-card:focus{
 }
     
 menu-icon{
-  float:right;
   padding:0.5em;
   width:70px;
 }
