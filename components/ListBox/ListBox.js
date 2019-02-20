@@ -17,6 +17,10 @@ class ListBox extends HTMLElement{
     super()
   }
 
+  getScrollContainer(){
+    return this.shadowRoot.querySelector('.scroll-container')
+  }
+
   slice(nodeList){
     return Array.prototype.slice.call(nodeList)
   }
@@ -49,7 +53,10 @@ class ListBox extends HTMLElement{
     
     this.focusedIdx = 0; // default focused element
     this.focusedItem= this.items[this.focusedIdx] // set ref to focused item
-    this.scrollOffset = 0;
+    this.scrollVars = {
+      leftStart:0,
+      clientXStart:0
+    }
 
 
     this.addEventListener('keydown', this.handleKeyDown.bind(this))
@@ -102,10 +109,10 @@ class ListBox extends HTMLElement{
       event.preventDefault()
 
       // define some kind of start point 
-
+      this.scrollVars.leftStart = this.getScrollContainer().scrollLeft
+      this.scrollVars.clientXStart = event.clientX;
       //
       
-
     }
   }
 
@@ -122,10 +129,13 @@ class ListBox extends HTMLElement{
   handleMouseMove(event){
     if(event.buttons == 1){
       event.preventDefault()
-      
-      // scroll some 
 
+      // scroll some 
+      let scrollDistance = this.scrollVars.clientXStart - event.clientX;
+      let totalScroll = this.scrollVars.leftStart + scrollDistance;
       //
+      this.getScrollContainer().scrollTo(totalScroll,0);
+      console.log(totalScroll)
 
     }
   }
