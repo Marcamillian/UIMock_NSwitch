@@ -17,10 +17,6 @@ class ListBox extends HTMLElement{
     super()
   }
 
-  getScrollContainer(){
-    return this.shadowRoot.querySelector('.scroll-container')
-  }
-
   slice(nodeList){
     return Array.prototype.slice.call(nodeList)
   }
@@ -51,6 +47,7 @@ class ListBox extends HTMLElement{
       item.style.display = "inline-block";
     })
     
+    this.scrollContainer = this.shadowRoot.querySelector('.scroll-container')
     this.focusedIdx = 0; // default focused element
     this.focusedItem= this.items[this.focusedIdx] // set ref to focused item
     this.scrollVars = {
@@ -105,11 +102,10 @@ class ListBox extends HTMLElement{
   handleClickStart(event){
     
     if(event.buttons == 1){
-      console.log("Click down")
       event.preventDefault()
 
       // define some kind of start point 
-      this.scrollVars.leftStart = this.getScrollContainer().scrollLeft
+      this.scrollVars.leftStart = this.scrollContainer.scrollLeft
       this.scrollVars.clientXStart = event.clientX;
       //
       
@@ -117,25 +113,28 @@ class ListBox extends HTMLElement{
   }
 
   handleClickEnd(event){
-    console.log("Click up")
     if (this.items.includes(event.target)){
       event.preventDefault()
 
-      let clickedItemIndex = this.items.indexOf(event.target);
-      this.changeFocus(clickedItemIndex)
+      // only select if there hasn't been a scroll
+      let scrollDistance = this.scrollVars.clientXStart - event.clientX;
+      if(Math.abs(scrollDistance) < 20){
+        let clickedItemIndex = this.items.indexOf(event.target);
+        this.changeFocus(clickedItemIndex)
+      }
     }
   }
 
   handleMouseMove(event){
+    
+    // if left click pressed
     if(event.buttons == 1){
       event.preventDefault()
 
       // scroll some 
       let scrollDistance = this.scrollVars.clientXStart - event.clientX;
       let totalScroll = this.scrollVars.leftStart + scrollDistance;
-      //
-      this.getScrollContainer().scrollTo(totalScroll,0);
-      console.log(totalScroll)
+      this.scrollContainer.scrollTo(totalScroll,0);
 
     }
   }
