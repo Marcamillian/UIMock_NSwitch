@@ -17,9 +17,18 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/1.0.14/webcomponents-hi.js"></script>
 
       <!-- import components-->
-      <link rel="import" href="./components/GameCard/GameCard.html">
-      <link rel="import" href="./components/MenuIcon/MenuIcon.html">
-      <link rel="import" href="./components/ListBox/ListBox.html">
+      <script type="module" >
+        // import the custom element classes
+        import GameCard from './components/GameCard.js';
+        import MenuIcon from './components/MenuIcon.js';
+        import ListBox from './components/ListBox.js'
+
+        // define the custom elements
+        customElements.define('game-card', GameCard)
+        customElements.define('menu-icon', MenuIcon)
+        customElements.define('list-box', ListBox)
+
+      </script>
       
     </head>
 
