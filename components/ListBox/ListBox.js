@@ -113,6 +113,8 @@ class ListBox extends HTMLElement{
   }
 
   handleClickEnd(event){
+    this.scrollAdjust()
+
     if (this.items.includes(event.target)){
       event.preventDefault()
 
@@ -159,6 +161,43 @@ class ListBox extends HTMLElement{
 
   blurItem(){
     this.tabIndex = -1
+  }
+
+  scrollAdjust(){
+    // get scroll position
+    let scrollPosition = this.scrollContainer.scrollLeft;
+    var itemBoundaries = [0]
+
+    // track a length across the scroll
+    this.items.forEach(( item, index )=>{
+      // cumulative distance of right edge of the item from container left
+      let newBound = (itemBoundaries[index] || 0) + item.clientWidth;
+      itemBoundaries.push( newBound )
+    })
+
+    for (var i=0; i < itemBoundaries.length; i++){
+      let lowerBound = itemBoundaries[i];
+      let upperBound = itemBoundaries[i+1];
+
+      if( scrollPosition >= lowerBound && scrollPosition < upperBound ){
+        
+        if(i == 0){ // in first item
+      
+          //this.items[0].scrollIntoView()
+          this.scrollContainer.scrollTo(0, 0)
+
+        }else if( itemBoundaries[i+1] == undefined){ // last item
+
+          this.scrollContainer.scrollTo(this.scrollContainer.clientWidth, 0)
+
+        }else{ // if in the middle
+
+          let scrollPosition = lowerBound + (upperBound - lowerBound)/2
+          this.scrollContainer.scrollTo( scrollPosition , 0  )
+        }
+        
+      }
+    }
   }
 
 }
