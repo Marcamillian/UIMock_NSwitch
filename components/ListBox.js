@@ -208,25 +208,22 @@ export default class ListBox extends HTMLElement{
       itemBoundaries.push( newBound )
     })
 
+    // for each of the item boundaries
     for (var i=0; i < itemBoundaries.length; i++){
       let lowerBound = itemBoundaries[i];
       let upperBound = itemBoundaries[i+1];
 
+      // if he position is between this boundary and the next
       if( scrollPosition >= lowerBound && scrollPosition < upperBound ){
         
         if(i == 0){ // in first item
-      
-          //this.items[0].scrollIntoView()
-          this.scrollContainer.scrollTo(0, 0)
-
+          this.scrollContainer.scroll({left: 0, behavior: 'smooth'}) // scroll to the beginning
         }else if( itemBoundaries[i+1] == undefined){ // last item
-
-          this.scrollContainer.scrollTo(this.scrollContainer.clientWidth, 0)
-
+          this.scrollContainer.scroll({left: this.scrollContainer.clientWidth, behavior:'smooth'}) // scroll to the end
         }else{ // if in the middle
 
           let scrollPosition = lowerBound + (upperBound - lowerBound)/2
-          this.scrollContainer.scrollTo( scrollPosition , 0  )
+          this.scrollContainer.scroll( {left: scrollPosition, behavior:'smooth'} )  // scroll to half way through the boundary item
         }
         
       }
