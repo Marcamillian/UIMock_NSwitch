@@ -1,5 +1,4 @@
-var currentDocument = document.currentScript.ownerDocument;
-
+// key codes
 const KB_CODES = {
   "VK_ENTER": 13,
   "VK_SPACE": 32,
@@ -11,7 +10,41 @@ const KB_CODES = {
   "VK_TAB":9,
 }
 
-class ListBox extends HTMLElement{
+// define component template
+const template = document.createElement('template')
+template.innerHTML = `
+  <style>
+    .scroll-container{
+      overflow-x: scroll;
+      overflow-y: hidden;
+      white-space: nowrap;
+    }
+
+    .scroll-container *{
+      display:inline-block;
+    }
+
+    ::-webkit-scrollbar {
+      height:0px;
+    }
+
+    ::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color:rgb(5,222,210, 0.3);
+      border-radius: 10px;
+    }
+  </style>
+
+  <div class="scroll-container">
+    <slot></slot>
+  </div>
+`
+
+export default class ListBox extends HTMLElement{
   
   constructor(){
     super()
@@ -34,11 +67,10 @@ class ListBox extends HTMLElement{
 
     // deal with the template
     let shadowRoot = this.attachShadow({mode:'open'});
-    let template = currentDocument.querySelector('#list-box-template');
     let instance = template.content.cloneNode(true);
-
     shadowRoot.appendChild(instance);
 
+    
     // handle the list of options that we have
     this.items = this.slice(this.children);
     this.items.forEach(item =>{
@@ -61,6 +93,7 @@ class ListBox extends HTMLElement{
     this.addEventListener('mousedown', this.handleClickStart.bind(this))
     this.addEventListener('mouseup', this.handleClickEnd.bind(this))
     this.addEventListener('mousemove', this.handleMouseMove.bind(this))
+    
   }
 
   handleKeyDown(event){
@@ -175,25 +208,22 @@ class ListBox extends HTMLElement{
       itemBoundaries.push( newBound )
     })
 
+    // for each of the item boundaries
     for (var i=0; i < itemBoundaries.length; i++){
       let lowerBound = itemBoundaries[i];
       let upperBound = itemBoundaries[i+1];
 
+      // if he position is between this boundary and the next
       if( scrollPosition >= lowerBound && scrollPosition < upperBound ){
         
         if(i == 0){ // in first item
-      
-          //this.items[0].scrollIntoView()
-          this.scrollContainer.scrollTo(0, 0)
-
+          this.scrollContainer.scroll({left: 0, behavior: 'smooth'}) // scroll to the beginning
         }else if( itemBoundaries[i+1] == undefined){ // last item
-
-          this.scrollContainer.scrollTo(this.scrollContainer.clientWidth, 0)
-
+          this.scrollContainer.scroll({left: this.scrollContainer.clientWidth, behavior:'smooth'}) // scroll to the end
         }else{ // if in the middle
 
           let scrollPosition = lowerBound + (upperBound - lowerBound)/2
-          this.scrollContainer.scrollTo( scrollPosition , 0  )
+          this.scrollContainer.scroll( {left: scrollPosition, behavior:'smooth'} )  // scroll to half way through the boundary item
         }
         
       }
@@ -202,4 +232,3 @@ class ListBox extends HTMLElement{
 
 }
 
-customElements.define('list-box', ListBox)

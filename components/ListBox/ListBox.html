@@ -1,8 +1,36 @@
 <template id="list-box-template">
   <style>
-  </style>
- 
+    .scroll-container{
+      overflow-x: scroll;
+      overflow-y: hidden;
+      white-space: nowrap;
+      /*scroll-behavior: smooth;*/
+    }
 
+    .scroll-container *{
+      display:inline-block;
+    }
+
+    ::-webkit-scrollbar {
+      height:0px;
+    }
+
+    ::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color:rgb(5,222,210, 0.3);
+      border-radius: 10px;
+    }
+    
+  </style>
+
+  <div class="scroll-container">
+      <slot></slot>
+  </div>
+  
 </template>
 
 <!-- import this javascript -->
